@@ -81,13 +81,12 @@ namespace UnluCoProductCatalog.Application.Services
             
             offer.PercentRate = offer.PercentRate != default ? entity.PercentRate : offer.PercentRate;
             offer.ProductId = offer.ProductId != default ? entity.ProductId : offer.ProductId;
-            offer.OfferedPrice = offer.OfferedPrice != default ? entity.OfferedPrice : offer.OfferedPrice;
-            offer.IsApproved = offer.IsApproved;
+            offer.OfferedPrice =offer.OfferedPrice != default ? entity.OfferedPrice : offer.OfferedPrice;
 
             _unitOfWork.Offer.Update(offer);
+
             if (!_unitOfWork.SaveChanges())
                 throw new NotSavedExceptions("Offer");
-
         }
 
         public void OfferApprove(int offerId)

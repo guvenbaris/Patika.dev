@@ -1,13 +1,12 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation;
 using System.Collections.Generic;
+using System.Linq;
 using UnluCoProductCatalog.Application.Exceptions;
 using UnluCoProductCatalog.Application.Interfaces.ServicesInterfaces;
 using UnluCoProductCatalog.Application.Interfaces.UnitOfWorks;
 using UnluCoProductCatalog.Application.Validations.CategoryValidation;
 using UnluCoProductCatalog.Application.ViewModels.CategoryViewModels;
-using UnluCoProductCatalog.Application.ViewModels.ProductViewModels;
 using UnluCoProductCatalog.Domain.Entities;
 
 namespace UnluCoProductCatalog.Application.Services
@@ -15,48 +14,29 @@ namespace UnluCoProductCatalog.Application.Services
     public class CategoryService : ICategoryService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        readonly IMapper _mapper;
+
 
         public CategoryService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
         public IEnumerable<CategoryViewModel> GetAll()
         {
             var categories = _unitOfWork.Category.GetAll();
-            var result = _mapper.Map<IList<CategoryViewModel>>(categories);
+            var result = _mapper.Map<IEnumerable<CategoryViewModel>>(categories);
 
             return result;
-        }
-
-        public IEnumerable<GetProductViewModel> GetProductsByCategoryId(int id)
-        {
-            if (id == 0)
-            { 
-                var productsAll = _unitOfWork.Product.GetProducts();
-                return productsAll;
-            }
-
-            var checkCategoryId = _unitOfWork.Category.GetById(id);
-            if (checkCategoryId is null)
-            {
-                throw new NotFoundExceptions("Category", id);
-            }
-            var productsFilter = _unitOfWork.Product.GetProductsByCategoryId(id);
-            if (productsFilter is null)
-            {
-                throw new NotFoundExceptions("Product");
-            }
-            return productsFilter;
         }
 
         public void Create(CommandCategoryViewModel entity)
         {
             var validator = new CommandCategoryViewModelValidator();
-            validator.ValidateAndThrow(entity);
+            validator.Validate(entity);
 
-            var category =  _mapper.Map<Category>(entity);
+            var category = _mapper.Map<Category>(entity);
 
             _unitOfWork.Category.Create(category);
 
@@ -64,7 +44,7 @@ namespace UnluCoProductCatalog.Application.Services
                 throw new NotSavedExceptions("Category");
         }
 
-        public void Update(CommandCategoryViewModel entity,int id)
+        public void Update(CommandCategoryViewModel entity, int id)
         {
             var validator = new CommandCategoryViewModelValidator();
             validator.ValidateAndThrow(entity);
@@ -75,7 +55,7 @@ namespace UnluCoProductCatalog.Application.Services
                 throw new NotFoundExceptions("Category", id);
 
             category.CategoryName = category.CategoryName != default ? entity.CategoryName : category.CategoryName;
-            
+
             _unitOfWork.Category.Update(category);
 
             if (!_unitOfWork.SaveChanges())
@@ -84,6 +64,8 @@ namespace UnluCoProductCatalog.Application.Services
 
         public void Delete(int id)
         {
+
+
             var category = _unitOfWork.Category.GetById(id);
 
             if (category is null)
@@ -98,3 +80,4 @@ namespace UnluCoProductCatalog.Application.Services
         }
     }
 }
+

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UnluCoProductCatalog.Domain.Entities
 {
@@ -12,6 +13,7 @@ namespace UnluCoProductCatalog.Domain.Entities
         public bool IsOfferable { get; set; } = false;
         public bool IsSold { get; set; }
         public int CategoryId { get; set; }
+        public Category Category { get; set; }
         public  Color Color { get; set; }
         public  Brand Brand { get; set; }
         public ICollection<Offer> Offers { get; set; }

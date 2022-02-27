@@ -20,8 +20,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public IActionResult Create(CreateOfferViewModel offer)
         {
-            //var userId = User.FindFirstValue(ClaimTypes.Name);
-            var userId = "514ee1a1-f24b-40bf-b0d9-c5da6357c151";
+            var userId = User.FindFirstValue(ClaimTypes.Name);
             _offerService.Create(offer,userId);
             return StatusCode((int)HttpStatusCode.Created);
 
@@ -38,8 +37,7 @@ namespace WebAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult Update([FromBody] UpdateOfferViewModel model,int id)
         {
-            //var userId = User.FindFirstValue(ClaimTypes.Name);
-            var userId = "514ee1a1-f24b-40bf-b0d9-c5da6357c151";
+            var userId = User.FindFirstValue(ClaimTypes.Name);
             _offerService.Update(model, userId,id);
             return Ok();
         }

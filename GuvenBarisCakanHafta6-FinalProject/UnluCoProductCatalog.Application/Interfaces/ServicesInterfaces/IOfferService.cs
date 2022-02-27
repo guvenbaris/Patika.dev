@@ -7,7 +7,7 @@ namespace UnluCoProductCatalog.Application.Interfaces.ServicesInterfaces
     public interface IOfferService
     {
         void Create(CreateOfferViewModel entity,string userId);
-        void Delete(int entity);
+        void Delete(int offerId);
         void OfferApprove(int offerId);
         void Update(UpdateOfferViewModel entity,string userId,int id);
     }

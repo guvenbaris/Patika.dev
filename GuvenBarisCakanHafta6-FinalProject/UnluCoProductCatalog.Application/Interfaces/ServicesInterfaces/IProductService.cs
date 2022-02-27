@@ -9,7 +9,10 @@ namespace UnluCoProductCatalog.Application.Interfaces.ServicesInterfaces
     {
         IEnumerable<GetProductViewModel> GetAll();
         void RetractTheOffer(int productId);
-        void SellProduct(int productId, string userId, double price);
+        IEnumerable<GetProductViewModel> GetProductsByCategoryId(int id);
+        IEnumerable<GetProductViewModel> GetUserProducts(string userId);
+        IEnumerable<ProductOfferViewModel> GetProductsForOffer();
+        void SellProduct(ProductSellViewModel entity, string userId);
         void Create(CreateProductViewModel entity,string userId);
         void UpdateIsOfferable(int id);
     }

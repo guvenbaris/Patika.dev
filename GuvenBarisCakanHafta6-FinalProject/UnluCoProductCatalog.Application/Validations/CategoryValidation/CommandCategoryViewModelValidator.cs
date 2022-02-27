@@ -7,7 +7,7 @@ namespace UnluCoProductCatalog.Application.Validations.CategoryValidation
     {
         public CommandCategoryViewModelValidator()
         {
-            RuleFor(c => c.CategoryName).NotEmpty().WithMessage("Category name is required");
+            RuleFor(c => c.CategoryName).NotNull().WithMessage("Category name is required");
         }
     }
 }

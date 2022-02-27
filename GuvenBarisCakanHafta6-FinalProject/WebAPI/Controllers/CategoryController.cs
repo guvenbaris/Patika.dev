@@ -21,17 +21,11 @@ namespace WebAPI.Controllers
             return Ok(_categoryService.GetAll());
         }
 
-        [HttpGet("categoryId")]
-        public IActionResult GetProductByCategory([FromQuery] int id = 0)
-        {
-            return Ok(_categoryService.GetProductsByCategoryId(id));
-        }
-
         [HttpPost]
         public IActionResult Create([FromBody] CommandCategoryViewModel category)
         {
             _categoryService.Create(category);
-            return Ok();
+            return StatusCode(201);
         }
 
         [HttpPut("{id}")]

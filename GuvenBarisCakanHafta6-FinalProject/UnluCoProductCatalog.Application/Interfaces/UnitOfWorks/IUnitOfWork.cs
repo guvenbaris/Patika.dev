@@ -1,4 +1,5 @@
 ﻿using UnluCoProductCatalog.Application.Interfaces.Repositories;
+using UnluCoProductCatalog.Domain.Entities;
 
 namespace UnluCoProductCatalog.Application.Interfaces.UnitOfWorks
 {

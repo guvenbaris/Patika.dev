@@ -1,6 +1,8 @@
 ﻿using UnluCoProductCatalog.Application.Interfaces.Repositories;
 using UnluCoProductCatalog.Application.Interfaces.UnitOfWorks;
+using UnluCoProductCatalog.Domain.Entities;
 using UnluCoProductCatalog.Infrastructure.Contexts;
+using UnluCoProductCatalog.Infrastructure.Repositories;
 
 namespace UnluCoProductCatalog.Infrastructure.UnitOfWorks
 {
@@ -20,18 +22,19 @@ namespace UnluCoProductCatalog.Infrastructure.UnitOfWorks
 
 
         public UnitOfWork(IColorRepository color, IOfferRepository offer, IProductRepository product,
-            ICategoryRepository category, IBrandRepository brand, IUsingStatusRepository usingStatus,
-            IAccountDetailRepository accountDetail, ProductCatalogDbContext context)
+             IBrandRepository brand, IUsingStatusRepository usingStatus,
+            IAccountDetailRepository accountDetail, ProductCatalogDbContext context, ICategoryRepository category)
         {
             _context = context;
+            Category = category;
             Color = color;
             Offer = offer;
             Product = product;
-            Category = category;
             Brand = brand;
             UsingStatus = usingStatus;
             AccountDetail = accountDetail;
         }
+
 
         public bool SaveChanges() => _context.SaveChanges() > 0;
     }

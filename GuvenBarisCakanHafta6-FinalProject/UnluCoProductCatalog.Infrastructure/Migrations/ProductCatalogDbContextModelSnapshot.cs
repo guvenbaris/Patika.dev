@@ -325,9 +325,6 @@ namespace UnluCoProductCatalog.Infrastructure.Migrations
                     b.Property<bool>("IsSold")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("OfferId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -345,6 +342,8 @@ namespace UnluCoProductCatalog.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("ColorId");
 
@@ -546,6 +545,12 @@ namespace UnluCoProductCatalog.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("BrandId");
 
+                    b.HasOne("UnluCoProductCatalog.Domain.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("UnluCoProductCatalog.Domain.Entities.Color", "Color")
                         .WithMany()
                         .HasForeignKey("ColorId");
@@ -557,6 +562,8 @@ namespace UnluCoProductCatalog.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Brand");
+
+                    b.Navigation("Category");
 
                     b.Navigation("Color");
 

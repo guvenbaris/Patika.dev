@@ -8,9 +8,8 @@ namespace UnluCoProductCatalog.Application.Interfaces.ServicesInterfaces
     public interface ICategoryService
     {
         IEnumerable<CategoryViewModel> GetAll();
-        IEnumerable<GetProductViewModel> GetProductsByCategoryId(int id);
         void Create(CommandCategoryViewModel entity);
-        void Update(CommandCategoryViewModel entity,int id);
+        void Update(CommandCategoryViewModel entity, int id);
         void Delete(int id);
     }
 }

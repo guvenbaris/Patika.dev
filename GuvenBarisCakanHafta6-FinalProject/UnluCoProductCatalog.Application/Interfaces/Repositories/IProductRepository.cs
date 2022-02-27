@@ -10,7 +10,8 @@ namespace UnluCoProductCatalog.Application.Interfaces.Repositories
     {
         public IEnumerable<GetProductViewModel> GetProductsByCategoryId(int id);
         public IEnumerable<GetProductViewModel> GetProducts();
-
+        public IEnumerable<ProductOfferViewModel> GetProductsForOffer();
+        public IEnumerable<GetProductViewModel> GetUserProducts(string userId);
 
     }
 }

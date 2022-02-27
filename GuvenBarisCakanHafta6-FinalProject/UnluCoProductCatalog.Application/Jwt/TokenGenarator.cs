@@ -27,7 +27,7 @@ namespace UnluCoProductCatalog.Application.Jwt
 
             var authClaims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name,user.Id)
+                new Claim(ClaimTypes.Name,user.Id),
             };
 
             foreach (var role in  userRoles)

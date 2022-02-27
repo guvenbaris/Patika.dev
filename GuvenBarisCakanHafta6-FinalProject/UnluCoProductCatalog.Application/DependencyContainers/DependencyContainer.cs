@@ -10,8 +10,6 @@ namespace UnluCoProductCatalog.Application.DependencyContainers
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<TokenGenarator>();
-            //services.AddScoped<ISmtpServer, SmtpServer>();
-
         }
     }
 }
