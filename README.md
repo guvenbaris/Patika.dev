@@ -1,2 +1,2 @@
 # Patika.dev
-Unlu&amp;Co Patika Bootcamp Homeworks
+Unlu&amp;Co Patika Bootcamp Homeworks 
